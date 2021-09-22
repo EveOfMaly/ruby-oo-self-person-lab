@@ -1,14 +1,15 @@
 # your code goes here
+require 'pry'
 
 class Person
-    attr_reader :name
-    attr_reader :bank_balance
+    attr_reader :name, :happiness
+    attr_accessor :bank_balance
 
     def initialize(name)
         @name = name
-        @happiness = 8 
+        @happiness_index = 8 
         @bank_balance = 25
-        @hygiene = 8
+        @hygiene_index = 8
     end
 
     def bank_account
@@ -16,33 +17,64 @@ class Person
     end
 
     def bank_account=(deposit)
-        @bank_balance = deposit
-    end
-
-    def happiness
-        @happiness 
+        @bank_balance += deposit
     end
 
 
-    def happiness=(happy_index)
-        @happiness = happy_index.clamp(0, 10) #takes a min and max of two argument to define the range in which the given arguments should be clamped
-    end
 
-    def hygiene
-        @hygiene
-    end
-
-    def hygiene=(hygiene_index)
-        @hygiene = hygiene_index.clamp(0, 10)
+    def happiness=(happy_point)
+        @happiness_score = happy_point 
     end
 
 
-  
+    def hygiene=(hygiene_point)
+        @hygiene_index = hygiene_point.clamp
+    end
 
 
- 
+    def happy?
+        if @happiness_score > 7 
+            return true 
+        else 
+            return false 
+        end
+    end
 
 
-     
+    def clean?
+        if @hygiene_index > 7 
+            return true 
+        else 
+            return false 
+        end
+
+    end
+
+    def get_paid(salary)
+        @salary = salary 
+        @bank_balance += @salary
+        return "all about the benjamins"
+    end
+
+    def take_bath
+        @hygiene_index += 4
+        return "♪ Rub-a-dub just relaxing in the tub ♫"
+    end
+
+    def work_out
+        @happiness_score += 2 
+        @hygiene_index -= 3 
+        return "♪ another one bites the dust ♫"
+    end
+    
+    def call_friend
+
+    end
+
+
+    def start_conversation
+
+    end
+
 
 end
