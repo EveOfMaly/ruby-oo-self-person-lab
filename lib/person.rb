@@ -1,80 +1,84 @@
 # your code goes here
 require 'pry'
 
-class Person
-    attr_reader :name, :happiness
-    attr_accessor :bank_balance
+
+class Person 
+    attr_reader :name, :happiness,  :hygiene
+    attr_accessor :bank_account
 
     def initialize(name)
         @name = name
-        @happiness_index = 8 
-        @bank_balance = 25
-        @hygiene_index = 8
-    end
+        @bank_account = 25
+        @happiness = 8
+        @hygiene = 8
+   end
 
-    def bank_account
-        @bank_balance 
-    end
+   def happiness=(happiness_point)
+    @happiness = happiness_point
 
-    def bank_account=(deposit)
-        @bank_balance += deposit
-    end
+    @happiness = 10 if @happiness > 10 
+    @happiness= 0 if @happiness < 0 
 
+   end
 
+   def hygiene=(hygiene_point)
+    @hygiene = hygiene_point
 
-    def happiness=(happy_point)
-        @happiness_score = happy_point 
-    end
+    @hygiene = 10 if @hygiene > 10 
+    @hygiene = 0 if @hygiene < 0 
 
-
-    def hygiene=(hygiene_point)
-        @hygiene_index = hygiene_point.clamp
-    end
-
+   end
 
     def happy?
-        if @happiness_score > 7 
-            return true 
-        else 
-            return false 
-        end
+        @happiness > 7 
     end
 
-
-    def clean?
-        if @hygiene_index > 7 
-            return true 
-        else 
-            return false 
-        end
-
-    end
+   def clean?
+    @hygiene > 7
+   end
 
     def get_paid(salary)
-        @salary = salary 
-        @bank_balance += @salary
-        return "all about the benjamins"
+        @bank_account += salary
+        "all about the benjamins"
     end
 
+
     def take_bath
-        @hygiene_index += 4
-        return "♪ Rub-a-dub just relaxing in the tub ♫"
+        self.hygiene += 4 
+        "♪ Rub-a-dub just relaxing in the tub ♫"
     end
 
     def work_out
-        @happiness_score += 2 
-        @hygiene_index -= 3 
-        return "♪ another one bites the dust ♫"
-    end
-    
-    def call_friend
-
+        self.hygiene -= 3 
+        self.happiness += 2
+        "♪ another one bites the dust ♫"
     end
 
+    def call_friend(friend)
+        self.happiness += 3 
+        friend.happiness += 3 
+        "Hi #{friend.name}! It's #{self.name}. How are you?"
+    end
 
-    def start_conversation
+    def start_conversation(person, topic)
+
+        if topic == "politics"
+            person.happiness -= 2
+            self.happiness -= 2
+            return "blah blah partisan blah lobbyist"
+        elsif topic == "weather"
+            person.happiness += 1
+            self.happiness += 1
+           return  "blah blah sun blah rain"
+        else 
+           return  "blah blah blah blah blah"
+        end
+
 
     end
 
 
-end
+
+
+
+end 
